@@ -1,130 +1,146 @@
 import Link from "next/link";
 import { event } from "@/content/event";
 import { teams } from "@/content/teams";
-import RetroPanel from "@/components/RetroPanel";
-import { NeedleDivider } from "@/components/SpaceNeedle";
+import SpaceNeedle from "@/components/SpaceNeedle";
 
 const sections = [
   {
     href: "/story",
+    icon: "📖",
     title: "The Story",
     blurb: "The full recap of the night, hour by hour.",
   },
   {
     href: "/projects",
+    icon: "🛠",
     title: "Projects",
     blurb: "Every team, what they built, and who took home prizes.",
   },
   {
     href: "/gallery",
-    title: "Photo Gallery",
+    icon: "📷",
+    title: "Gallery",
     blurb: "The photos to prove it all happened.",
   },
 ];
+
+// Flat skyline strip for the hero — buildings with needles rising between.
+const buildings = [10, 22, 14, 30, 18, 26, 12, 34, 20, 16, 28, 14];
 
 export default function Home() {
   const winners = teams.filter((t) => t.prize);
 
   return (
     <>
-      {/* The obligatory scrolling welcome */}
-      <div className="marquee bevel-in mb-4 bg-silhouette py-1 font-mono text-[13px] font-bold text-gold">
-        <span className="marquee-track">
-          ★·.·´¯`·.·★ Welcome to the OFFICIAL {event.name} recap page!! You are
-          now surfing the story of {event.date} in {event.city}. Enjoy your
-          stay and don&apos;t forget to sign the guestbook!! ★·.·´¯`·.·★
-        </span>
-      </div>
+      {/* Full-bleed hero: navy gradient, centered uppercase title, ghost CTA */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-navy to-navy-soft text-center text-white">
+        <div className="relative z-10 mx-auto max-w-3xl px-5 pt-20 pb-36">
+          <p className="font-display text-xs font-bold uppercase tracking-[0.25em] text-green">
+            Event recap · {event.date} · {event.city}
+          </p>
+          <h1 className="mt-4 font-display text-5xl font-extrabold uppercase tracking-wide sm:text-6xl">
+            {event.name}
+          </h1>
+          <p className="mx-auto mt-5 max-w-xl text-lg text-wolf">
+            {event.tagline}
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/story"
+              className="bg-green px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wider text-navy transition-colors hover:bg-white"
+            >
+              Read the story
+            </Link>
+            <Link
+              href="/projects"
+              className="border-2 border-white/70 px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wider text-white transition-colors hover:border-green hover:text-green"
+            >
+              See the projects
+            </Link>
+          </div>
+        </div>
+        <div
+          className="absolute inset-x-0 bottom-0 flex items-end justify-between px-2 text-[#001529]"
+          aria-hidden="true"
+        >
+          {buildings.map((h, i) =>
+            i % 4 === 2 ? (
+              <SpaceNeedle key={i} className="h-28 shrink-0" />
+            ) : (
+              <div
+                key={i}
+                className="w-10 shrink-0 bg-current sm:w-14"
+                style={{ height: `${h * 2.4}px` }}
+              />
+            )
+          )}
+        </div>
+      </section>
 
-      <div className="flex flex-col gap-4 sm:flex-row">
-        {/* Main column */}
-        <div className="flex-1 space-y-4">
-          <RetroPanel title="⚡ What is this page?">
-            <p className="retro-links text-sm leading-relaxed">
-              {event.summary} Everything below was built, photographed, and
-              barely slept through during <b>{event.name}</b> — 24 hours of
-              hacking in the shadow of the Space Needle.
-            </p>
-            <NeedleDivider />
-            <ul className="retro-links space-y-2 text-sm">
-              {sections.map(({ href, title, blurb }) => (
-                <li key={href}>
-                  <span className="mr-1 text-navy">▸</span>
-                  <Link href={href} className="font-bold">
-                    {title}
-                  </Link>{" "}
-                  — {blurb}
+      {/* Big-number stats strip — peak 2016 */}
+      <section className="bg-white shadow-sm">
+        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-y-8 px-5 py-10 text-center sm:grid-cols-4">
+          {event.stats.map(({ label, value }) => (
+            <div key={label}>
+              <dd className="font-display text-4xl font-extrabold text-navy">
+                {value}
+              </dd>
+              <dt className="mt-1 text-xs font-bold uppercase tracking-[0.15em] text-wolf">
+                {label}
+              </dt>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* Section cards */}
+      <section className="mx-auto max-w-6xl px-5 py-14">
+        <p className="mx-auto max-w-2xl text-center text-lg">{event.summary}</p>
+        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          {sections.map(({ href, icon, title, blurb }) => (
+            <Link key={href} href={href} className="card p-6 text-center">
+              <span className="text-3xl" aria-hidden="true">
+                {icon}
+              </span>
+              <h2 className="mt-3 font-display text-sm font-extrabold uppercase tracking-[0.15em] text-navy">
+                {title}
+              </h2>
+              <div className="mx-auto mt-2 h-0.5 w-8 bg-green" />
+              <p className="mt-3 text-sm text-ink/70">{blurb}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Winners */}
+      {winners.length > 0 && (
+        <section className="bg-navy py-14 text-white">
+          <div className="mx-auto max-w-6xl px-5">
+            <h2 className="text-center font-display text-2xl font-extrabold uppercase tracking-wide">
+              The podium
+            </h2>
+            <div className="mx-auto mt-3 h-1 w-16 bg-green" />
+            <ul className="mx-auto mt-8 max-w-2xl space-y-3">
+              {winners.map((t) => (
+                <li key={t.slug}>
+                  <Link
+                    href={`/projects/${t.slug}`}
+                    className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-l-4 border-green bg-navy-soft px-5 py-4 transition-colors hover:bg-[#12406b]"
+                  >
+                    <span className="font-display text-xs font-bold uppercase tracking-wider text-green">
+                      {t.prize}
+                    </span>
+                    <span className="font-display text-lg font-bold">
+                      {t.projectName}
+                    </span>
+                    <span className="text-sm text-wolf">by {t.teamName}</span>
+                  </Link>
                 </li>
               ))}
             </ul>
-          </RetroPanel>
-
-          {winners.length > 0 && (
-            <RetroPanel title="🏆 Hall of Fame">
-              <table className="w-full border-collapse text-sm">
-                <tbody>
-                  {winners.map((t) => (
-                    <tr key={t.slug} className="border-b border-dotted border-navy/40 last:border-0">
-                      <td className="py-1.5 pr-2 whitespace-nowrap font-mono text-xs font-bold text-navy">
-                        {t.prize}
-                      </td>
-                      <td className="retro-links py-1.5">
-                        <Link href={`/projects/${t.slug}`} className="font-bold">
-                          {t.projectName}
-                        </Link>{" "}
-                        <span className="text-xs">by {t.teamName}</span>
-                      </td>
-                      <td className="py-1.5 text-right">
-                        <span className="blink bg-gold px-1 text-[10px] font-bold text-[#cc0000]">
-                          NEW!
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </RetroPanel>
-          )}
-        </div>
-
-        {/* Sidebar */}
-        <div className="w-full space-y-4 sm:w-52">
-          <RetroPanel title="📊 Event stats">
-            <table className="w-full text-[13px]">
-              <tbody>
-                {event.stats.map(({ label, value }) => (
-                  <tr key={label}>
-                    <td className="py-0.5">{label}</td>
-                    <td className="py-0.5 text-right font-mono font-bold text-navy">
-                      {value}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </RetroPanel>
-
-          <RetroPanel title="👁 Visitors">
-            <p className="text-center text-xs">You are visitor number:</p>
-            <p className="bevel-in mx-auto mt-1 w-fit bg-black px-2 py-0.5 font-mono text-lg font-bold tracking-widest text-[#33ff33]">
-              013847
-            </p>
-            <p className="mt-1 text-center text-[10px] text-[#555555]">
-              (counter may be aspirational)
-            </p>
-          </RetroPanel>
-
-          <RetroPanel title="🌧 Seattle weather">
-            <p className="text-center text-[13px]">
-              Raining.
-              <br />
-              <span className="text-[10px] text-[#555555]">
-                (forecast valid year-round)
-              </span>
-            </p>
-          </RetroPanel>
-        </div>
-      </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }

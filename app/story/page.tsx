@@ -3,14 +3,13 @@ import path from "node:path";
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import PageBand from "@/components/PageBand";
-import SpaceNeedle from "@/components/SpaceNeedle";
 
 export const metadata: Metadata = {
   title: "The Story",
 };
 
 // Headings written as "## 02:37 — The bug that almost won" get the
-// time pulled out and set in Courier, like a forum post timestamp.
+// time pulled out as a green chip, like a schedule entry.
 const TIME_HEADING = /^(\d{1,2}:\d{2})\s*[—–-]\s*(.*)$/;
 
 function StoryHeading({ children }: { children?: React.ReactNode }) {
@@ -18,11 +17,10 @@ function StoryHeading({ children }: { children?: React.ReactNode }) {
   const match = text.match(TIME_HEADING);
 
   return (
-    <h2 className="mt-6 flex items-center gap-2 border-b border-dotted border-navy/40 pb-1 font-display text-xl font-bold text-navy">
-      <SpaceNeedle className="h-5 shrink-0" />
+    <h2 className="mt-10 flex flex-wrap items-center gap-3 font-display text-xl font-extrabold uppercase tracking-wide text-navy">
       {match ? (
         <>
-          <span className="bevel-in bg-silhouette px-1.5 font-mono text-[13px] font-normal text-[#33ff33]">
+          <span className="bg-green px-2 py-0.5 font-display text-xs font-bold tracking-wider text-navy">
             {match[1]}
           </span>
           {match[2]}
@@ -48,21 +46,17 @@ export default function StoryPage() {
         title="The Story"
         intro="What actually happened, from doors-open to the last demo."
       />
-      <article className="bevel-out mx-auto max-w-3xl bg-paper p-4">
+      <article className="card mx-auto my-12 max-w-3xl p-8">
         <ReactMarkdown
           components={{
             h1: () => null, // the PageBand already carries the title
             h2: ({ children }) => <StoryHeading>{children}</StoryHeading>,
             p: ({ children }) => (
-              <p className="mt-3 text-sm leading-relaxed">{children}</p>
+              <p className="mt-4 leading-relaxed">{children}</p>
             ),
-            em: ({ children }) => (
-              <em className="text-[#555555]">{children}</em>
-            ),
+            em: ({ children }) => <em className="text-ink/60">{children}</em>,
             ul: ({ children }) => (
-              <ul className="mt-3 list-disc space-y-1 pl-6 text-sm">
-                {children}
-              </ul>
+              <ul className="mt-4 list-disc space-y-1.5 pl-6">{children}</ul>
             ),
             img: ({ src, alt }) => (
               // Plain <img> here: markdown images have unknown dimensions,
@@ -71,7 +65,7 @@ export default function StoryPage() {
               <img
                 src={typeof src === "string" ? src : undefined}
                 alt={alt ?? ""}
-                className="bevel-in my-4 w-full"
+                className="my-6 w-full rounded shadow-md"
               />
             ),
           }}

@@ -5,7 +5,7 @@ export default function PrintButton() {
     <button
       type="button"
       onClick={() => window.print()}
-      className="bevel-out bg-panel px-4 py-1 font-display text-sm font-bold text-ink hover:text-link active:bevel-in print:hidden"
+      className="bg-green px-5 py-2 font-display text-xs font-bold uppercase tracking-wider text-navy transition-colors hover:bg-navy hover:text-white print:hidden"
     >
       🖨 Print / save as PDF
     </button>

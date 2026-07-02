@@ -1,6 +1,4 @@
-import SpaceNeedle from "@/components/SpaceNeedle";
-
-// Page title strip — needle bullet, Trebuchet title, dotted rule underneath.
+// Flat navy page header with the green accent rule — every inner page opens with it.
 export default function PageBand({
   eyebrow,
   title,
@@ -11,15 +9,17 @@ export default function PageBand({
   intro?: string;
 }) {
   return (
-    <div className="mb-5 border-b border-navy/15 pb-4">
-      <p className="font-mono text-xs font-bold uppercase tracking-widest text-navy">
-        » {eyebrow}
-      </p>
-      <div className="mt-1 flex items-center gap-2.5 text-navy">
-        <SpaceNeedle className="h-9" />
-        <h1 className="font-display text-3xl font-bold">{title}</h1>
+    <section className="bg-navy text-white">
+      <div className="mx-auto max-w-6xl px-5 py-12">
+        <p className="font-display text-xs font-bold uppercase tracking-[0.2em] text-green">
+          {eyebrow}
+        </p>
+        <h1 className="mt-2 font-display text-3xl font-extrabold uppercase tracking-wide sm:text-4xl">
+          {title}
+        </h1>
+        <div className="mt-4 h-1 w-16 bg-green" />
+        {intro && <p className="mt-4 max-w-2xl text-wolf">{intro}</p>}
       </div>
-      {intro && <p className="mt-2 max-w-2xl text-sm">{intro}</p>}
-    </div>
+    </section>
   );
 }

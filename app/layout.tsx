@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
+import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { event } from "@/content/event";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-// No webfonts — Verdana, Trebuchet MS, and Courier New ship with the OS,
-// exactly like a 2005 site would have it.
+// The 2016 pairing: Montserrat for uppercase display, Open Sans for body.
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+});
+
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -21,14 +30,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-full">
-        {/* Still a centered column like 2005, but a floating rounded card now */}
-        <div className="mx-auto my-6 flex min-h-[calc(100vh-3rem)] w-[min(100%-2rem,980px)] flex-col overflow-hidden rounded-2xl bg-panel shadow-2xl print:my-0 print:min-h-0 print:w-full print:rounded-none print:bg-white print:shadow-none">
-          <Header />
-          <main className="flex-1 px-5 py-5 print:p-0">{children}</main>
-          <Footer />
-        </div>
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${openSans.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

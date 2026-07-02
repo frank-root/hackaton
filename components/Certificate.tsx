@@ -14,7 +14,7 @@ export default function Certificate({
 }) {
   return (
     <div className="certificate flex flex-col border-8 border-navy bg-white text-ink">
-      <div className="m-3 flex flex-1 flex-col border-2 border-gold px-14 py-10">
+      <div className="m-3 flex flex-1 flex-col border-2 border-green px-14 py-10">
         <div className="flex items-end justify-center gap-4 text-navy" aria-hidden="true">
           <SpaceNeedle className="h-8" />
           <SpaceNeedle className="h-12" />

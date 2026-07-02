@@ -33,10 +33,10 @@ export default async function ProjectPage({ params }: Props) {
         intro={team.pitch}
       />
 
-      <div className="flex flex-col gap-4 sm:flex-row">
-        <div className="flex-1 space-y-4">
-          <RetroPanel title="📝 The write-up">
-            <div className="space-y-3 text-sm leading-relaxed">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-12 sm:flex-row">
+        <div className="flex-1 space-y-6">
+          <RetroPanel title="The write-up">
+            <div className="space-y-4 leading-relaxed">
               {team.description.split("\n\n").map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
@@ -44,8 +44,8 @@ export default async function ProjectPage({ params }: Props) {
           </RetroPanel>
 
           {team.images && team.images.length > 0 && (
-            <RetroPanel title="📷 Screenshots">
-              <div className="grid gap-2 sm:grid-cols-2">
+            <RetroPanel title="Screenshots">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {team.images.map((img) => (
                   <Image
                     key={img}
@@ -53,7 +53,7 @@ export default async function ProjectPage({ params }: Props) {
                     alt={`${team.projectName} screenshot`}
                     width={800}
                     height={450}
-                    className="bevel-in"
+                    className="rounded"
                   />
                 ))}
               </div>
@@ -61,50 +61,52 @@ export default async function ProjectPage({ params }: Props) {
           )}
         </div>
 
-        <div className="w-full space-y-4 sm:w-52">
-          <RetroPanel title="ℹ Team info">
-            <table className="w-full text-[13px]">
-              <tbody>
-                <tr>
-                  <td className="py-0.5 pr-2 align-top font-bold">Team:</td>
-                  <td className="py-0.5">{team.teamName}</td>
-                </tr>
-                <tr>
-                  <td className="py-0.5 pr-2 align-top font-bold">Who:</td>
-                  <td className="py-0.5">{team.members.join(", ")}</td>
-                </tr>
-                {team.prize && (
-                  <tr>
-                    <td className="py-0.5 pr-2 align-top font-bold">Won:</td>
-                    <td className="py-0.5">
-                      <span className="bg-gold px-1 font-mono text-[10px] font-bold text-[#cc0000]">
-                        {team.prize}
-                      </span>
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+        <div className="w-full space-y-6 sm:w-64">
+          <RetroPanel title="Team info">
+            <dl className="space-y-3 text-sm">
+              <div>
+                <dt className="text-xs font-bold uppercase tracking-wider text-wolf">
+                  Team
+                </dt>
+                <dd className="mt-0.5">{team.teamName}</dd>
+              </div>
+              <div>
+                <dt className="text-xs font-bold uppercase tracking-wider text-wolf">
+                  Members
+                </dt>
+                <dd className="mt-0.5">{team.members.join(", ")}</dd>
+              </div>
+              {team.prize && (
+                <div>
+                  <dt className="text-xs font-bold uppercase tracking-wider text-wolf">
+                    Won
+                  </dt>
+                  <dd className="mt-1">
+                    <span className="bg-green px-2 py-0.5 font-display text-[10px] font-bold uppercase tracking-wider text-navy">
+                      {team.prize}
+                    </span>
+                  </dd>
+                </div>
+              )}
+            </dl>
             {(team.demoUrl || team.repoUrl) && (
-              <ul className="retro-links mt-2 space-y-1 border-t border-dotted border-navy/40 pt-2 text-[13px]">
+              <ul className="body-links mt-4 space-y-1.5 border-t border-mist pt-4 text-sm">
                 {team.demoUrl && (
                   <li>
-                    <span className="mr-1 text-navy">▸</span>
-                    <a href={team.demoUrl}>Live demo</a>
+                    <a href={team.demoUrl}>Live demo →</a>
                   </li>
                 )}
                 {team.repoUrl && (
                   <li>
-                    <span className="mr-1 text-navy">▸</span>
-                    <a href={team.repoUrl}>Source code</a>
+                    <a href={team.repoUrl}>Source code →</a>
                   </li>
                 )}
               </ul>
             )}
           </RetroPanel>
 
-          <p className="retro-links text-[13px]">
-            « <Link href="/projects">Back to all projects</Link>
+          <p className="body-links text-sm">
+            <Link href="/projects">← Back to all projects</Link>
           </p>
         </div>
       </div>

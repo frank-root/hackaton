@@ -1,5 +1,5 @@
-// Forum-category-style box: navy gradient title bar, white content area.
-// The whole site is assembled out of these.
+// Flat 2016 card with an uppercase section label and green accent rule.
+// (Name is a holdover from the retro design; the API stayed the same.)
 export default function RetroPanel({
   title,
   children,
@@ -10,11 +10,12 @@ export default function RetroPanel({
   className?: string;
 }) {
   return (
-    <section className={`bevel-out bg-paper ${className}`}>
-      <h2 className="bg-navy px-4 py-2 font-display text-sm font-bold text-white">
+    <section className={`card p-6 ${className}`}>
+      <h2 className="font-display text-xs font-extrabold uppercase tracking-[0.2em] text-navy">
         {title}
       </h2>
-      <div className="p-4">{children}</div>
+      <div className="mt-2 mb-4 h-0.5 w-10 bg-green" />
+      {children}
     </section>
   );
 }
