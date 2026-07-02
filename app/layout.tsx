@@ -23,10 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="min-h-full">
-        {/* The era's centered fixed-width "800x600 friendly" column */}
-        <div className="mx-auto flex min-h-screen max-w-[900px] flex-col border-x-2 border-navy bg-panel shadow-[4px_0_8px_rgba(0,0,0,0.3)] print:max-w-none print:border-0 print:bg-white print:shadow-none">
+        {/* Still a centered column like 2005, but a floating rounded card now */}
+        <div className="mx-auto my-6 flex min-h-[calc(100vh-3rem)] w-[min(100%-2rem,980px)] flex-col overflow-hidden rounded-2xl bg-panel shadow-2xl print:my-0 print:min-h-0 print:w-full print:rounded-none print:bg-white print:shadow-none">
           <Header />
-          <main className="flex-1 px-4 py-4 print:p-0">{children}</main>
+          <main className="flex-1 px-5 py-5 print:p-0">{children}</main>
           <Footer />
         </div>
       </body>

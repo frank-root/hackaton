@@ -11,15 +11,15 @@ export default function PageBand({
   intro?: string;
 }) {
   return (
-    <div className="mb-4 border-b-2 border-dotted border-navy pb-3">
-      <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-navy">
+    <div className="mb-5 border-b border-navy/15 pb-4">
+      <p className="font-mono text-xs font-bold uppercase tracking-widest text-navy">
         » {eyebrow}
       </p>
-      <div className="mt-1 flex items-center gap-2 text-navy">
-        <SpaceNeedle className="h-8" />
+      <div className="mt-1 flex items-center gap-2.5 text-navy">
+        <SpaceNeedle className="h-9" />
         <h1 className="font-display text-3xl font-bold">{title}</h1>
       </div>
-      {intro && <p className="mt-2 max-w-2xl text-[13px]">{intro}</p>}
+      {intro && <p className="mt-2 max-w-2xl text-sm">{intro}</p>}
     </div>
   );
 }

@@ -30,7 +30,7 @@ export default function GalleryPage() {
       {photos.length > 0 ? (
         <Lightbox photos={photos} />
       ) : (
-        <p className="font-mono text-[12px] text-[#555555]">
+        <p className="font-mono text-[13px] text-[#555555]">
           No photos yet — drop image files into public/photos and rebuild.
         </p>
       )}

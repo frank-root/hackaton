@@ -25,7 +25,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="retro-links mt-4 text-center text-[11px]">
+      <div className="retro-links mt-4 text-center text-xs">
         <p>
           © {event.name} · webmaster: Ryan ·{" "}
           <a href="https://github.com/ryanwill424-lang/hackaton">

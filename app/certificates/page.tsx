@@ -23,7 +23,7 @@ export default function CertificatesPage() {
       </div>
       <section className="space-y-6 print:space-y-0">
         <div className="flex flex-wrap items-center justify-between gap-2 print:hidden">
-          <p className="font-mono text-[12px] text-[#555555]">
+          <p className="font-mono text-[13px] text-[#555555]">
             In the print dialog choose landscape orientation and disable
             headers/footers.
           </p>

@@ -36,7 +36,7 @@ export default async function ProjectPage({ params }: Props) {
       <div className="flex flex-col gap-4 sm:flex-row">
         <div className="flex-1 space-y-4">
           <RetroPanel title="📝 The write-up">
-            <div className="space-y-3 text-[13px] leading-relaxed">
+            <div className="space-y-3 text-sm leading-relaxed">
               {team.description.split("\n\n").map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
@@ -63,7 +63,7 @@ export default async function ProjectPage({ params }: Props) {
 
         <div className="w-full space-y-4 sm:w-52">
           <RetroPanel title="ℹ Team info">
-            <table className="w-full text-[12px]">
+            <table className="w-full text-[13px]">
               <tbody>
                 <tr>
                   <td className="py-0.5 pr-2 align-top font-bold">Team:</td>
@@ -86,7 +86,7 @@ export default async function ProjectPage({ params }: Props) {
               </tbody>
             </table>
             {(team.demoUrl || team.repoUrl) && (
-              <ul className="retro-links mt-2 space-y-1 border-t border-dotted border-navy/40 pt-2 text-[12px]">
+              <ul className="retro-links mt-2 space-y-1 border-t border-dotted border-navy/40 pt-2 text-[13px]">
                 {team.demoUrl && (
                   <li>
                     <span className="mr-1 text-navy">▸</span>
@@ -103,7 +103,7 @@ export default async function ProjectPage({ params }: Props) {
             )}
           </RetroPanel>
 
-          <p className="retro-links text-[12px]">
+          <p className="retro-links text-[13px]">
             « <Link href="/projects">Back to all projects</Link>
           </p>
         </div>

@@ -22,7 +22,7 @@ function StoryHeading({ children }: { children?: React.ReactNode }) {
       <SpaceNeedle className="h-5 shrink-0" />
       {match ? (
         <>
-          <span className="bevel-in bg-silhouette px-1.5 font-mono text-[12px] font-normal text-[#33ff33]">
+          <span className="bevel-in bg-silhouette px-1.5 font-mono text-[13px] font-normal text-[#33ff33]">
             {match[1]}
           </span>
           {match[2]}
@@ -54,13 +54,13 @@ export default function StoryPage() {
             h1: () => null, // the PageBand already carries the title
             h2: ({ children }) => <StoryHeading>{children}</StoryHeading>,
             p: ({ children }) => (
-              <p className="mt-3 text-[13px] leading-relaxed">{children}</p>
+              <p className="mt-3 text-sm leading-relaxed">{children}</p>
             ),
             em: ({ children }) => (
               <em className="text-[#555555]">{children}</em>
             ),
             ul: ({ children }) => (
-              <ul className="mt-3 list-disc space-y-1 pl-6 text-[13px]">
+              <ul className="mt-3 list-disc space-y-1 pl-6 text-sm">
                 {children}
               </ul>
             ),

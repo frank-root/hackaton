@@ -11,10 +11,10 @@ export default function RetroPanel({
 }) {
   return (
     <section className={`bevel-out bg-paper ${className}`}>
-      <h2 className="bg-gradient-to-b from-sky to-navy px-3 py-1 font-display text-sm font-bold text-white">
+      <h2 className="bg-navy px-4 py-2 font-display text-sm font-bold text-white">
         {title}
       </h2>
-      <div className="p-3">{children}</div>
+      <div className="p-4">{children}</div>
     </section>
   );
 }

@@ -61,14 +61,14 @@ export default function Lightbox({ photos }: { photos: string[] }) {
             className="bevel-out bg-panel p-2"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between bg-gradient-to-b from-sky to-navy px-2 py-0.5">
-              <span className="font-display text-[12px] font-bold text-white">
+            <div className="flex items-center justify-between rounded-md bg-navy px-2.5 py-1">
+              <span className="font-display text-[13px] font-bold text-white">
                 Image viewer — {current + 1} of {photos.length}
               </span>
               <button
                 type="button"
                 onClick={() => setCurrent(null)}
-                className="bevel-out ml-4 bg-panel px-1.5 font-mono text-[11px] font-bold leading-tight text-ink"
+                className="bevel-out ml-4 bg-panel px-1.5 font-mono text-xs font-bold leading-tight text-ink"
                 aria-label="Close"
               >
                 ✕
@@ -81,7 +81,7 @@ export default function Lightbox({ photos }: { photos: string[] }) {
               height={1200}
               className="mt-2 max-h-[75vh] w-auto"
             />
-            <p className="pt-1 text-center font-mono text-[11px] text-[#555555]">
+            <p className="pt-1 text-center font-mono text-xs text-[#555555]">
               use ← → arrow keys · esc closes
             </p>
           </div>

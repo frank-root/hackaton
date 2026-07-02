@@ -47,8 +47,8 @@ export default function ProjectsPage() {
                   ★ {t.prize} ★
                 </span>
               )}
-              <p className="mt-1 text-[11px] text-[#555555]">by {t.teamName}</p>
-              <p className="mt-1.5 text-[12px]">{t.pitch}</p>
+              <p className="mt-1 text-xs text-[#555555]">by {t.teamName}</p>
+              <p className="mt-1.5 text-[13px]">{t.pitch}</p>
             </div>
           </Link>
         ))}

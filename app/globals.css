@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 /*
- * Mid-2000s personal-fansite theme, Seattle edition.
- * XP-dialog beige panels, navy title bars, classic link blue,
- * starburst gold, and a dusk-sky banner. System fonts only — like 2005.
+ * Retro-modern theme, Seattle edition: mid-2000s bones (navy title bars,
+ * panel boxes, badge wall, marquee) with modern surfaces — rounded cards,
+ * soft shadows, flat background, and system-ui type.
  */
 :root {
   --navy: #003366;
   --sky: #6699cc;
-  --panel: #ece9d8;
+  --panel: #f2efe6;
   --paper: #ffffff;
-  --ink: #000000;
-  --link: #0000ee;
-  --visited: #551a8b;
+  --ink: #1a2433;
+  --link: #0b57d0;
+  --visited: #6d3fb8;
   --gold: #ffcc00;
   --dusk: #f4a460;
   --silhouette: #001830;
@@ -29,47 +29,48 @@
   --color-dusk: var(--dusk);
   --color-silhouette: var(--silhouette);
 
-  --font-display: "Trebuchet MS", "Lucida Grande", sans-serif;
-  --font-sans: Verdana, Tahoma, Geneva, sans-serif;
+  --font-display: "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-sans: "Segoe UI", system-ui, Verdana, sans-serif;
   --font-mono: "Courier New", Courier, monospace;
 }
 
 body {
-  /* Tiled pinstripe background — the era's answer to whitespace */
-  background: repeating-linear-gradient(
-    90deg,
-    #b8cbdd 0px,
-    #b8cbdd 3px,
-    #c2d3e3 3px,
-    #c2d3e3 6px
-  );
+  background: linear-gradient(180deg, #e9f0f8 0%, #d3dfec 100%) fixed;
   color: var(--ink);
-  font-family: Verdana, Tahoma, Geneva, sans-serif;
-  font-size: 13px;
+  font-family: "Segoe UI", system-ui, Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
 }
 
-/* Classic default link colors, like the browser shipped them */
+/* Classic underlined links, modern blue */
 article a,
 .retro-links a {
   color: var(--link);
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 article a:visited,
 .retro-links a:visited {
   color: var(--visited);
 }
 
-/* Windows-style beveled edges */
+/*
+ * Once Windows-style bevels — now soft cards, so every panel, button,
+ * and badge modernizes in one place without renaming classes.
+ */
 .bevel-out {
-  border: 2px solid;
-  border-color: #ffffff #6b6b6b #6b6b6b #ffffff;
+  border: 1px solid rgba(0, 51, 102, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 24, 48, 0.08), 0 6px 16px rgba(0, 24, 48, 0.07);
 }
 .bevel-in {
-  border: 2px solid;
-  border-color: #6b6b6b #ffffff #ffffff #6b6b6b;
+  border: 1px solid rgba(0, 51, 102, 0.15);
+  border-radius: 7px;
+  overflow: hidden;
 }
 
-/* One marquee, on the home page */
+/* One marquee, on the home page — slower now, it's had twenty years */
 .marquee {
   overflow: hidden;
   white-space: nowrap;
@@ -77,7 +78,7 @@ article a:visited,
 .marquee-track {
   display: inline-block;
   padding-left: 100%;
-  animation: marquee 20s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 @keyframes marquee {
   to {
@@ -85,13 +86,9 @@ article a:visited,
   }
 }
 
+/* Retired the <blink> era: NEW! badges hold still now */
 .blink {
-  animation: blink 1.2s steps(1) infinite;
-}
-@keyframes blink {
-  50% {
-    visibility: hidden;
-  }
+  display: inline-block;
 }
 
 ::selection {

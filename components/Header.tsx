@@ -51,8 +51,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Beveled button nav bar */}
-      <nav className="flex flex-wrap gap-1 border-b-2 border-navy bg-panel p-1.5">
+      {/* Nav pills — the pressed-in button, twenty years on */}
+      <nav className="flex flex-wrap gap-1.5 border-b border-navy/15 bg-panel px-3 py-2">
         {links.map(({ href, label }) => {
           const active =
             href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -60,10 +60,10 @@ export default function Header() {
             <Link
               key={href}
               href={href}
-              className={`px-4 py-1 font-display text-sm font-bold ${
+              className={`rounded-lg px-4 py-1.5 font-display text-sm font-bold transition-colors ${
                 active
-                  ? "bevel-in bg-[#d6d2c2] text-navy"
-                  : "bevel-out bg-panel text-ink hover:text-link"
+                  ? "bg-navy text-white shadow-sm"
+                  : "text-ink hover:bg-white/80 hover:text-navy"
               }`}
             >
               {label}

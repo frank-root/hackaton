@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <>
       {/* The obligatory scrolling welcome */}
-      <div className="marquee bevel-in mb-4 bg-silhouette py-1 font-mono text-[12px] font-bold text-gold">
+      <div className="marquee bevel-in mb-4 bg-silhouette py-1 font-mono text-[13px] font-bold text-gold">
         <span className="marquee-track">
           ★·.·´¯`·.·★ Welcome to the OFFICIAL {event.name} recap page!! You are
           now surfing the story of {event.date} in {event.city}. Enjoy your
@@ -40,13 +40,13 @@ export default function Home() {
         {/* Main column */}
         <div className="flex-1 space-y-4">
           <RetroPanel title="⚡ What is this page?">
-            <p className="retro-links text-[13px] leading-relaxed">
+            <p className="retro-links text-sm leading-relaxed">
               {event.summary} Everything below was built, photographed, and
               barely slept through during <b>{event.name}</b> — 24 hours of
               hacking in the shadow of the Space Needle.
             </p>
             <NeedleDivider />
-            <ul className="retro-links space-y-2 text-[13px]">
+            <ul className="retro-links space-y-2 text-sm">
               {sections.map(({ href, title, blurb }) => (
                 <li key={href}>
                   <span className="mr-1 text-navy">▸</span>
@@ -61,18 +61,18 @@ export default function Home() {
 
           {winners.length > 0 && (
             <RetroPanel title="🏆 Hall of Fame">
-              <table className="w-full border-collapse text-[13px]">
+              <table className="w-full border-collapse text-sm">
                 <tbody>
                   {winners.map((t) => (
                     <tr key={t.slug} className="border-b border-dotted border-navy/40 last:border-0">
-                      <td className="py-1.5 pr-2 whitespace-nowrap font-mono text-[11px] font-bold text-navy">
+                      <td className="py-1.5 pr-2 whitespace-nowrap font-mono text-xs font-bold text-navy">
                         {t.prize}
                       </td>
                       <td className="retro-links py-1.5">
                         <Link href={`/projects/${t.slug}`} className="font-bold">
                           {t.projectName}
                         </Link>{" "}
-                        <span className="text-[11px]">by {t.teamName}</span>
+                        <span className="text-xs">by {t.teamName}</span>
                       </td>
                       <td className="py-1.5 text-right">
                         <span className="blink bg-gold px-1 text-[10px] font-bold text-[#cc0000]">
@@ -90,7 +90,7 @@ export default function Home() {
         {/* Sidebar */}
         <div className="w-full space-y-4 sm:w-52">
           <RetroPanel title="📊 Event stats">
-            <table className="w-full text-[12px]">
+            <table className="w-full text-[13px]">
               <tbody>
                 {event.stats.map(({ label, value }) => (
                   <tr key={label}>
@@ -105,7 +105,7 @@ export default function Home() {
           </RetroPanel>
 
           <RetroPanel title="👁 Visitors">
-            <p className="text-center text-[11px]">You are visitor number:</p>
+            <p className="text-center text-xs">You are visitor number:</p>
             <p className="bevel-in mx-auto mt-1 w-fit bg-black px-2 py-0.5 font-mono text-lg font-bold tracking-widest text-[#33ff33]">
               013847
             </p>
@@ -115,7 +115,7 @@ export default function Home() {
           </RetroPanel>
 
           <RetroPanel title="🌧 Seattle weather">
-            <p className="text-center text-[12px]">
+            <p className="text-center text-[13px]">
               Raining.
               <br />
               <span className="text-[10px] text-[#555555]">
