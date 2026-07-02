@@ -14,7 +14,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="bg-night text-dawn">
+    <header className="bg-night text-dawn print:hidden">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           href="/"

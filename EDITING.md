@@ -34,6 +34,15 @@ Drop image files in the folder — the gallery finds them automatically at build
 time (sorted by filename, so prefix with `01-`, `02-`, … to control order).
 Delete the `placeholder-*.svg` files when real photos arrive.
 
+## 5. Certificates — `/certificates`
+
+A print-ready page with one certificate each for 1st, 2nd, and 3rd Place
+(it's not linked in the nav — just open the URL). Set a team's `prize` to
+exactly `"1st Place"`, `"2nd Place"`, or `"3rd Place"` in `content/teams.ts`
+and the winner's name is filled in; otherwise the name line stays blank so
+you can handwrite it. Click **Print / save as PDF**, choose landscape, and
+turn off browser headers/footers.
+
 ## Preview and publish
 
 ```bash
