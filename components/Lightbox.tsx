@@ -29,48 +29,62 @@ export default function Lightbox({ photos }: { photos: string[] }) {
 
   return (
     <>
+      {/* Photo-album grid: white-mat frames like a 2005 photo hosting site */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {photos.map((src, i) => (
           <button
             key={src}
             type="button"
             onClick={() => setCurrent(i)}
-            className="group overflow-hidden rounded-md border border-ink/10 focus-visible:outline-2 focus-visible:outline-sodium"
+            className="bevel-out bg-paper p-1.5 hover:bg-[#ffffcc] focus-visible:outline-2 focus-visible:outline-navy"
           >
             <Image
               src={src}
               alt={`Event photo ${i + 1}`}
               width={480}
               height={480}
-              className="aspect-square w-full object-cover transition-transform group-hover:scale-105"
+              className="bevel-in aspect-square w-full object-cover"
             />
+            <p className="pt-1 font-mono text-[10px] text-[#555555]">
+              img_{String(i + 1).padStart(3, "0")}.jpg
+            </p>
           </button>
         ))}
       </div>
 
       {current !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-night/95 p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-silhouette/90 p-6"
           onClick={() => setCurrent(null)}
         >
-          <Image
-            src={photos[current]}
-            alt={`Event photo ${current + 1}`}
-            width={1600}
-            height={1200}
-            className="max-h-[85vh] w-auto rounded-md"
+          <div
+            className="bevel-out bg-panel p-2"
             onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            type="button"
-            onClick={() => setCurrent(null)}
-            className="absolute top-4 right-6 font-mono text-sm text-mist hover:text-dawn"
           >
-            close [esc]
-          </button>
-          <p className="absolute bottom-4 font-mono text-sm text-mist">
-            {current + 1} / {photos.length} · ← →
-          </p>
+            <div className="flex items-center justify-between bg-gradient-to-b from-sky to-navy px-2 py-0.5">
+              <span className="font-display text-[12px] font-bold text-white">
+                Image viewer — {current + 1} of {photos.length}
+              </span>
+              <button
+                type="button"
+                onClick={() => setCurrent(null)}
+                className="bevel-out ml-4 bg-panel px-1.5 font-mono text-[11px] font-bold leading-tight text-ink"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+            <Image
+              src={photos[current]}
+              alt={`Event photo ${current + 1}`}
+              width={1600}
+              height={1200}
+              className="mt-2 max-h-[75vh] w-auto"
+            />
+            <p className="pt-1 text-center font-mono text-[11px] text-[#555555]">
+              use ← → arrow keys · esc closes
+            </p>
+          </div>
         </div>
       )}
     </>

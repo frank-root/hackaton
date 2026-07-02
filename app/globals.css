@@ -1,41 +1,102 @@
 @import "tailwindcss";
 
 /*
- * Palette: the site follows the arc of the event itself.
- * Night (deep 2am blue) for the hero and footer, dawn (cool pale) for
- * the content, sodium amber (streetlight glow) as the only accent.
+ * Mid-2000s personal-fansite theme, Seattle edition.
+ * XP-dialog beige panels, navy title bars, classic link blue,
+ * starburst gold, and a dusk-sky banner. System fonts only — like 2005.
  */
 :root {
-  --night: #10162b;
-  --night-soft: #1a2140;
-  --dawn: #edeff5;
-  --ink: #1b2137;
-  --mist: #8a93b8;
-  --sodium: #f5a83c;
+  --navy: #003366;
+  --sky: #6699cc;
+  --panel: #ece9d8;
+  --paper: #ffffff;
+  --ink: #000000;
+  --link: #0000ee;
+  --visited: #551a8b;
+  --gold: #ffcc00;
+  --dusk: #f4a460;
+  --silhouette: #001830;
 }
 
 @theme inline {
-  --color-night: var(--night);
-  --color-night-soft: var(--night-soft);
-  --color-dawn: var(--dawn);
+  --color-navy: var(--navy);
+  --color-sky: var(--sky);
+  --color-panel: var(--panel);
+  --color-paper: var(--paper);
   --color-ink: var(--ink);
-  --color-mist: var(--mist);
-  --color-sodium: var(--sodium);
+  --color-link: var(--link);
+  --color-gold: var(--gold);
+  --color-dusk: var(--dusk);
+  --color-silhouette: var(--silhouette);
 
-  --font-display: var(--font-bricolage);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: "Trebuchet MS", "Lucida Grande", sans-serif;
+  --font-sans: Verdana, Tahoma, Geneva, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
 }
 
 body {
-  background: var(--dawn);
+  /* Tiled pinstripe background — the era's answer to whitespace */
+  background: repeating-linear-gradient(
+    90deg,
+    #b8cbdd 0px,
+    #b8cbdd 3px,
+    #c2d3e3 3px,
+    #c2d3e3 6px
+  );
   color: var(--ink);
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: Verdana, Tahoma, Geneva, sans-serif;
+  font-size: 13px;
+}
+
+/* Classic default link colors, like the browser shipped them */
+article a,
+.retro-links a {
+  color: var(--link);
+  text-decoration: underline;
+}
+article a:visited,
+.retro-links a:visited {
+  color: var(--visited);
+}
+
+/* Windows-style beveled edges */
+.bevel-out {
+  border: 2px solid;
+  border-color: #ffffff #6b6b6b #6b6b6b #ffffff;
+}
+.bevel-in {
+  border: 2px solid;
+  border-color: #6b6b6b #ffffff #ffffff #6b6b6b;
+}
+
+/* One marquee, on the home page */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.blink {
+  animation: blink 1.2s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    visibility: hidden;
+  }
 }
 
 ::selection {
-  background: var(--sodium);
-  color: var(--night);
+  background: var(--navy);
+  color: #ffffff;
 }
 
 /* Certificates: Letter-landscape shape on screen, one full page each in print */

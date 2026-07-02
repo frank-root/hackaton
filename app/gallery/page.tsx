@@ -24,18 +24,16 @@ export default function GalleryPage() {
     <>
       <PageBand
         eyebrow="The evidence"
-        title="Gallery"
-        intro={`${photos.length} photos from the night.`}
+        title="Photo Gallery"
+        intro={`${photos.length} photos from the night. Click any thumbnail for the full-size version.`}
       />
-      <section className="mx-auto max-w-6xl px-6 py-16">
-        {photos.length > 0 ? (
-          <Lightbox photos={photos} />
-        ) : (
-          <p className="font-mono text-sm text-ink/60">
-            No photos yet — drop image files into public/photos and rebuild.
-          </p>
-        )}
-      </section>
+      {photos.length > 0 ? (
+        <Lightbox photos={photos} />
+      ) : (
+        <p className="font-mono text-[12px] text-[#555555]">
+          No photos yet — drop image files into public/photos and rebuild.
+        </p>
+      )}
     </>
   );
 }

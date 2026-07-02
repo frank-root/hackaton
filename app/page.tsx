@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { event } from "@/content/event";
 import { teams } from "@/content/teams";
-
-// 25 ticks = a 24-hour span with a tick on each hour, taller every 6h.
-const ticks = Array.from({ length: 25 }, (_, i) => i);
+import RetroPanel from "@/components/RetroPanel";
+import { NeedleDivider } from "@/components/SpaceNeedle";
 
 const sections = [
   {
@@ -18,7 +17,7 @@ const sections = [
   },
   {
     href: "/gallery",
-    title: "Gallery",
+    title: "Photo Gallery",
     blurb: "The photos to prove it all happened.",
   },
 ];
@@ -28,97 +27,104 @@ export default function Home() {
 
   return (
     <>
-      {/* Night: the hero is the night itself */}
-      <section className="bg-night text-dawn">
-        <div className="mx-auto max-w-6xl px-6 pt-20 pb-16">
-          <p className="font-mono text-sm uppercase tracking-widest text-sodium">
-            Event recap · {event.date} · {event.city}
-          </p>
-          <h1 className="mt-4 font-display text-6xl font-bold tracking-tight sm:text-8xl">
-            {event.name}
-          </h1>
-          <p className="mt-6 max-w-xl text-xl text-mist">{event.tagline}</p>
+      {/* The obligatory scrolling welcome */}
+      <div className="marquee bevel-in mb-4 bg-silhouette py-1 font-mono text-[12px] font-bold text-gold">
+        <span className="marquee-track">
+          ★·.·´¯`·.·★ Welcome to the OFFICIAL {event.name} recap page!! You are
+          now surfing the story of {event.date} in {event.city}. Enjoy your
+          stay and don&apos;t forget to sign the guestbook!! ★·.·´¯`·.·★
+        </span>
+      </div>
 
-          {/* The 24-hour strip: the whole event, one glance */}
-          <div className="mt-16" aria-hidden="true">
-            <div className="flex items-end justify-between">
-              {ticks.map((h) => (
-                <div
-                  key={h}
-                  className={`w-px ${
-                    h % 6 === 0 ? "h-6 bg-sodium" : "h-3 bg-mist/40"
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="mt-2 flex justify-between font-mono text-xs text-mist">
-              <span>doors open</span>
-              <span className="hidden sm:inline">the long night</span>
-              <span>demos</span>
-            </div>
-          </div>
-
-          {/* Stats as log lines, not big-number cards */}
-          <dl className="mt-14 grid gap-2 font-mono text-sm sm:grid-cols-2">
-            {event.stats.map(({ label, value }) => (
-              <div key={label} className="flex gap-3">
-                <dt className="text-mist">
-                  <span className="pr-3 text-sodium">&gt;</span>
-                  {label}
-                </dt>
-                <dd className="text-dawn">{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      {/* Dawn: what came out of the night */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
-        <p className="max-w-2xl text-lg">{event.summary}</p>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-3">
-          {sections.map(({ href, title, blurb }) => (
-            <Link
-              key={href}
-              href={href}
-              className="group rounded-md border border-ink/10 bg-white p-6 transition-colors hover:border-sodium"
-            >
-              <h2 className="font-display text-2xl font-bold group-hover:text-night">
-                {title}
-              </h2>
-              <p className="mt-2 text-sm text-ink/70">{blurb}</p>
-              <p className="mt-4 font-mono text-sm text-sodium">Read →</p>
-            </Link>
-          ))}
-        </div>
-
-        {winners.length > 0 && (
-          <div className="mt-16">
-            <h2 className="font-mono text-sm uppercase tracking-widest text-ink/60">
-              Winners
-            </h2>
-            <ul className="mt-4 divide-y divide-ink/10">
-              {winners.map((t) => (
-                <li key={t.slug}>
-                  <Link
-                    href={`/projects/${t.slug}`}
-                    className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 py-4"
-                  >
-                    <span className="rounded bg-sodium px-2 py-0.5 font-mono text-xs font-medium text-night">
-                      {t.prize}
-                    </span>
-                    <span className="font-display text-xl font-bold group-hover:text-sodium">
-                      {t.projectName}
-                    </span>
-                    <span className="text-sm text-ink/60">{t.teamName}</span>
-                  </Link>
+      <div className="flex flex-col gap-4 sm:flex-row">
+        {/* Main column */}
+        <div className="flex-1 space-y-4">
+          <RetroPanel title="⚡ What is this page?">
+            <p className="retro-links text-[13px] leading-relaxed">
+              {event.summary} Everything below was built, photographed, and
+              barely slept through during <b>{event.name}</b> — 24 hours of
+              hacking in the shadow of the Space Needle.
+            </p>
+            <NeedleDivider />
+            <ul className="retro-links space-y-2 text-[13px]">
+              {sections.map(({ href, title, blurb }) => (
+                <li key={href}>
+                  <span className="mr-1 text-navy">▸</span>
+                  <Link href={href} className="font-bold">
+                    {title}
+                  </Link>{" "}
+                  — {blurb}
                 </li>
               ))}
             </ul>
-          </div>
-        )}
-      </section>
+          </RetroPanel>
+
+          {winners.length > 0 && (
+            <RetroPanel title="🏆 Hall of Fame">
+              <table className="w-full border-collapse text-[13px]">
+                <tbody>
+                  {winners.map((t) => (
+                    <tr key={t.slug} className="border-b border-dotted border-navy/40 last:border-0">
+                      <td className="py-1.5 pr-2 whitespace-nowrap font-mono text-[11px] font-bold text-navy">
+                        {t.prize}
+                      </td>
+                      <td className="retro-links py-1.5">
+                        <Link href={`/projects/${t.slug}`} className="font-bold">
+                          {t.projectName}
+                        </Link>{" "}
+                        <span className="text-[11px]">by {t.teamName}</span>
+                      </td>
+                      <td className="py-1.5 text-right">
+                        <span className="blink bg-gold px-1 text-[10px] font-bold text-[#cc0000]">
+                          NEW!
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </RetroPanel>
+          )}
+        </div>
+
+        {/* Sidebar */}
+        <div className="w-full space-y-4 sm:w-52">
+          <RetroPanel title="📊 Event stats">
+            <table className="w-full text-[12px]">
+              <tbody>
+                {event.stats.map(({ label, value }) => (
+                  <tr key={label}>
+                    <td className="py-0.5">{label}</td>
+                    <td className="py-0.5 text-right font-mono font-bold text-navy">
+                      {value}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </RetroPanel>
+
+          <RetroPanel title="👁 Visitors">
+            <p className="text-center text-[11px]">You are visitor number:</p>
+            <p className="bevel-in mx-auto mt-1 w-fit bg-black px-2 py-0.5 font-mono text-lg font-bold tracking-widest text-[#33ff33]">
+              013847
+            </p>
+            <p className="mt-1 text-center text-[10px] text-[#555555]">
+              (counter may be aspirational)
+            </p>
+          </RetroPanel>
+
+          <RetroPanel title="🌧 Seattle weather">
+            <p className="text-center text-[12px]">
+              Raining.
+              <br />
+              <span className="text-[10px] text-[#555555]">
+                (forecast valid year-round)
+              </span>
+            </p>
+          </RetroPanel>
+        </div>
+      </div>
     </>
   );
 }

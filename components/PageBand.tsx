@@ -1,5 +1,6 @@
-// The dark "night band" that opens every inner page — keeps the
-// night → dawn arc consistent across the site.
+import SpaceNeedle from "@/components/SpaceNeedle";
+
+// Page title strip — needle bullet, Trebuchet title, dotted rule underneath.
 export default function PageBand({
   eyebrow,
   title,
@@ -10,16 +11,15 @@ export default function PageBand({
   intro?: string;
 }) {
   return (
-    <section className="bg-night text-dawn">
-      <div className="mx-auto max-w-6xl px-6 pt-14 pb-16">
-        <p className="font-mono text-sm uppercase tracking-widest text-sodium">
-          {eyebrow}
-        </p>
-        <h1 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-6xl">
-          {title}
-        </h1>
-        {intro && <p className="mt-4 max-w-2xl text-lg text-mist">{intro}</p>}
+    <div className="mb-4 border-b-2 border-dotted border-navy pb-3">
+      <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-navy">
+        » {eyebrow}
+      </p>
+      <div className="mt-1 flex items-center gap-2 text-navy">
+        <SpaceNeedle className="h-8" />
+        <h1 className="font-display text-3xl font-bold">{title}</h1>
       </div>
-    </section>
+      {intro && <p className="mt-2 max-w-2xl text-[13px]">{intro}</p>}
+    </div>
   );
 }
