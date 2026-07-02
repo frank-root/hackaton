@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
+/*
+ * Palette: the site follows the arc of the event itself.
+ * Night (deep 2am blue) for the hero and footer, dawn (cool pale) for
+ * the content, sodium amber (streetlight glow) as the only accent.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --night: #10162b;
+  --night-soft: #1a2140;
+  --dawn: #edeff5;
+  --ink: #1b2137;
+  --mist: #8a93b8;
+  --sodium: #f5a83c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-night: var(--night);
+  --color-night-soft: var(--night-soft);
+  --color-dawn: var(--dawn);
+  --color-ink: var(--ink);
+  --color-mist: var(--mist);
+  --color-sodium: var(--sodium);
+
+  --font-display: var(--font-bricolage);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--dawn);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+::selection {
+  background: var(--sodium);
+  color: var(--night);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

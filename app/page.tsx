@@ -1,65 +1,124 @@
-import Image from "next/image";
+import Link from "next/link";
+import { event } from "@/content/event";
+import { teams } from "@/content/teams";
+
+// 25 ticks = a 24-hour span with a tick on each hour, taller every 6h.
+const ticks = Array.from({ length: 25 }, (_, i) => i);
+
+const sections = [
+  {
+    href: "/story",
+    title: "The Story",
+    blurb: "The full recap of the night, hour by hour.",
+  },
+  {
+    href: "/projects",
+    title: "Projects",
+    blurb: "Every team, what they built, and who took home prizes.",
+  },
+  {
+    href: "/gallery",
+    title: "Gallery",
+    blurb: "The photos to prove it all happened.",
+  },
+];
 
 export default function Home() {
+  const winners = teams.filter((t) => t.prize);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* Night: the hero is the night itself */}
+      <section className="bg-night text-dawn">
+        <div className="mx-auto max-w-6xl px-6 pt-20 pb-16">
+          <p className="font-mono text-sm uppercase tracking-widest text-sodium">
+            Event recap · {event.date} · {event.city}
           </p>
+          <h1 className="mt-4 font-display text-6xl font-bold tracking-tight sm:text-8xl">
+            {event.name}
+          </h1>
+          <p className="mt-6 max-w-xl text-xl text-mist">{event.tagline}</p>
+
+          {/* The 24-hour strip: the whole event, one glance */}
+          <div className="mt-16" aria-hidden="true">
+            <div className="flex items-end justify-between">
+              {ticks.map((h) => (
+                <div
+                  key={h}
+                  className={`w-px ${
+                    h % 6 === 0 ? "h-6 bg-sodium" : "h-3 bg-mist/40"
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="mt-2 flex justify-between font-mono text-xs text-mist">
+              <span>doors open</span>
+              <span className="hidden sm:inline">the long night</span>
+              <span>demos</span>
+            </div>
+          </div>
+
+          {/* Stats as log lines, not big-number cards */}
+          <dl className="mt-14 grid gap-2 font-mono text-sm sm:grid-cols-2">
+            {event.stats.map(({ label, value }) => (
+              <div key={label} className="flex gap-3">
+                <dt className="text-mist">
+                  <span className="pr-3 text-sodium">&gt;</span>
+                  {label}
+                </dt>
+                <dd className="text-dawn">{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Dawn: what came out of the night */}
+      <section className="mx-auto max-w-6xl px-6 py-16">
+        <p className="max-w-2xl text-lg">{event.summary}</p>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          {sections.map(({ href, title, blurb }) => (
+            <Link
+              key={href}
+              href={href}
+              className="group rounded-md border border-ink/10 bg-white p-6 transition-colors hover:border-sodium"
+            >
+              <h2 className="font-display text-2xl font-bold group-hover:text-night">
+                {title}
+              </h2>
+              <p className="mt-2 text-sm text-ink/70">{blurb}</p>
+              <p className="mt-4 font-mono text-sm text-sodium">Read →</p>
+            </Link>
+          ))}
         </div>
-      </main>
-    </div>
+
+        {winners.length > 0 && (
+          <div className="mt-16">
+            <h2 className="font-mono text-sm uppercase tracking-widest text-ink/60">
+              Winners
+            </h2>
+            <ul className="mt-4 divide-y divide-ink/10">
+              {winners.map((t) => (
+                <li key={t.slug}>
+                  <Link
+                    href={`/projects/${t.slug}`}
+                    className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 py-4"
+                  >
+                    <span className="rounded bg-sodium px-2 py-0.5 font-mono text-xs font-medium text-night">
+                      {t.prize}
+                    </span>
+                    <span className="font-display text-xl font-bold group-hover:text-sodium">
+                      {t.projectName}
+                    </span>
+                    <span className="text-sm text-ink/60">{t.teamName}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </section>
+    </>
   );
 }
